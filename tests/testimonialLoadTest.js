@@ -18,7 +18,7 @@ export const options = {
 
 export default function testimonialLoadTest() {
 
-    // Step 1: Login to get token
+    // call login to get token
     const loginResponse = loginRequest(PAYLOADS.login);
     validateLoginResponse(loginResponse);
 
@@ -29,7 +29,7 @@ export default function testimonialLoadTest() {
         return;
     }
 
-    // Step 2: POST testimonial
+    //  POST testimonial and extract testimonial ID
     const postResponse = postTestimonial(PAYLOADS.testimonial, token);
     validateTestimonialResponse(postResponse);
 
@@ -40,14 +40,14 @@ export default function testimonialLoadTest() {
         return;
     }
 
-    // Step 3: UPDATE testimonial
+  //update testimonial using the testimonial iD that was extracted above
     const updateResponse = updateTestimonial(testimonialId, PAYLOADS.updateTestimonial, token);
     validateUpdateTestimonialResponse(updateResponse);
 
-    // Step 4: DELETE testimonial
+    //delete testimonial
     const deleteResponse = deleteTestimonial(testimonialId, token);
     validateDeleteTestimonialResponse(deleteResponse);
 
-    sleep(1); // Pause 1s between iterations to avoid hammering the server
-    
+    sleep(1); 
+
 }

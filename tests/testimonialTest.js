@@ -18,7 +18,7 @@ export const options = {
 
 export default function testimonialTest() {
 
-    // Step 1: Login to get token
+    // Call Login to get token
     const loginResponse = loginRequest(PAYLOADS.login);
     console.log(`Login status: ${loginResponse.status}`);
     validateLoginResponse(loginResponse);
@@ -30,13 +30,13 @@ export default function testimonialTest() {
         return;
     }
 
-    // Step 2: Post a new testimonial
+    //  Post a new testimonial
     const postResponse = postTestimonial(PAYLOADS.testimonial, token);
     console.log(`Post Testimonial status: ${postResponse.status}`);
     console.log(`Post Testimonial body: ${postResponse.body}`);
     validateTestimonialResponse(postResponse);
 
-    // Step 3: Extract testimonial ID from post response
+    // Extract testimonial ID from post response
     const testimonialId = JSON.parse(postResponse.body).data?.Id;
     console.log(`Testimonial ID: ${testimonialId}`);
 
@@ -45,13 +45,13 @@ export default function testimonialTest() {
         return;
     }
 
-    // Step 4: Update the testimonial
+    //  Update the testimonial using the testimonial ID extracted above
     const updateResponse = updateTestimonial(testimonialId, PAYLOADS.updateTestimonial, token);
     console.log(`Update Testimonial status: ${updateResponse.status}`);
     console.log(`Update Testimonial body: ${updateResponse.body}`);
     validateUpdateTestimonialResponse(updateResponse);
 
-    // Step 5: Delete the testimonial
+    //  Delete the testimonial
     const deleteResponse = deleteTestimonial(testimonialId, token);
     console.log(`Delete Testimonial status: ${deleteResponse.status}`);
     console.log(`Delete Testimonial body: ${deleteResponse.body}`);
