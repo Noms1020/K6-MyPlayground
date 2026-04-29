@@ -30,32 +30,32 @@ export default function testimonialTest() {
         return;
     }
 
-    //  Post a new testimonial
+    //post new testimonial
     const postResponse = postTestimonial(PAYLOADS.testimonial, token);
     console.log(`Post Testimonial status: ${postResponse.status}`);
     console.log(`Post Testimonial body: ${postResponse.body}`);
     validateTestimonialResponse(postResponse);
 
-    // Extract testimonial ID from post response
+   //extract testimonial ID from the post response
     const testimonialId = JSON.parse(postResponse.body).data?.Id;
     console.log(`Testimonial ID: ${testimonialId}`);
-
+     //checks/validations
     if (!testimonialId) {
         console.error('No testimonial ID received — skipping update and delete');
         return;
     }
 
-    //  Update the testimonial using the testimonial ID extracted above
+   //update testiminial using the extracted testimonial ID
     const updateResponse = updateTestimonial(testimonialId, PAYLOADS.updateTestimonial, token);
     console.log(`Update Testimonial status: ${updateResponse.status}`);
     console.log(`Update Testimonial body: ${updateResponse.body}`);
     validateUpdateTestimonialResponse(updateResponse);
 
-    //  Delete the testimonial
+    //delete testimonial using the extracted ID
     const deleteResponse = deleteTestimonial(testimonialId, token);
     console.log(`Delete Testimonial status: ${deleteResponse.status}`);
     console.log(`Delete Testimonial body: ${deleteResponse.body}`);
     validateDeleteTestimonialResponse(deleteResponse);
 
-    // sleep(TEST_CONFIG.sleepTime);
+    
 }
